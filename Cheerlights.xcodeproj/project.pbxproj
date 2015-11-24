@@ -10,6 +10,9 @@
 		39B5465D1C04708200F87235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B5465C1C04708200F87235 /* AppDelegate.swift */; };
 		39B5465F1C04708200F87235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39B5465E1C04708200F87235 /* Assets.xcassets */; };
 		39B546621C04708200F87235 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B546601C04708200F87235 /* MainMenu.xib */; };
+		39B5466A1C04727100F87235 /* CLMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B546691C04727100F87235 /* CLMenuItem.swift */; };
+		39B5466C1C0475FC00F87235 /* NSColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B5466B1C0475FC00F87235 /* NSColor+Hex.swift */; };
+		39B5466E1C0479BF00F87235 /* NSImage+SwatchWithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B5466D1C0479BF00F87235 /* NSImage+SwatchWithColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +21,9 @@
 		39B5465E1C04708200F87235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39B546611C04708200F87235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		39B546631C04708200F87235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39B546691C04727100F87235 /* CLMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLMenuItem.swift; sourceTree = "<group>"; };
+		39B5466B1C0475FC00F87235 /* NSColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Hex.swift"; sourceTree = "<group>"; };
+		39B5466D1C0479BF00F87235 /* NSImage+SwatchWithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+SwatchWithColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				39B5465C1C04708200F87235 /* AppDelegate.swift */,
+				39B5466D1C0479BF00F87235 /* NSImage+SwatchWithColor.swift */,
+				39B5466B1C0475FC00F87235 /* NSColor+Hex.swift */,
+				39B546691C04727100F87235 /* CLMenuItem.swift */,
 				39B5465E1C04708200F87235 /* Assets.xcassets */,
 				39B546601C04708200F87235 /* MainMenu.xib */,
 				39B546631C04708200F87235 /* Info.plist */,
@@ -128,6 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B5466E1C0479BF00F87235 /* NSImage+SwatchWithColor.swift in Sources */,
+				39B5466A1C04727100F87235 /* CLMenuItem.swift in Sources */,
+				39B5466C1C0475FC00F87235 /* NSColor+Hex.swift in Sources */,
 				39B5465D1C04708200F87235 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
