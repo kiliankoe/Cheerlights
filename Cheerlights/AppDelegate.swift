@@ -22,38 +22,55 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		statusItem.menu = menu
-		menu.addItem(CLMenuItem(title: "Change Color", keyEquivalent: "", action: { () -> () in
-			let url = NSURL(string: "https://twitter.com/intent/tweet?text=@cheerlights%20")
-			NSWorkspace.sharedWorkspace().openURL(url!)
-			
-			// Let's update early if the user has just submitted a color to make them happy :)
-			NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: "update", userInfo: nil, repeats: false)
-		}))
+		
+		menu.addItem(NSMenuItem(title: "Change Color", action: "openTwitter", keyEquivalent: ""))
+		menu.addItem(NSMenuItem(title: "Update Now", action: "update", keyEquivalent: ""))
 		menu.addItem(NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: ""))
 		
 		update()
 		NSTimer.scheduledTimerWithTimeInterval(kUpdateTime, target: self, selector: "update", userInfo: nil, repeats: true)
 	}
 	
+	/**
+	Open a new tweet to @cheerlights for the user to submit so that the global color can be changed.
+	*/
+	func openTwitter() {
+		let url = NSURL(string: "https://twitter.com/intent/tweet?text=@cheerlights%20")
+		NSWorkspace.sharedWorkspace().openURL(url!)
+		
+		// Let's update early if the user has just submitted a color to make them happy :)
+		NSTimer.scheduledTimerWithTimeInterval(20.0, target: self, selector: "update", userInfo: nil, repeats: false)
+	}
+	
+	/**
+	Update by sending an update request and change the statusItem image.
+	*/
 	func update() {
-		NSLog("Updating Cheerlights Color")
-		updateColor { [unowned self] (color) -> Void in
+		NSLog("Updating Cheerlights color...")
+		sendUpdateRequest { [unowned self] (color) -> Void in
 			self.statusItem.image = NSImage.swatchWithColor(color, size: NSSize(width: kIconSize, height: kIconSize))
 		}
 	}
 	
-	func updateColor(completion: (color: NSColor) -> Void) {
+	/**
+	Send a request to Cheerlights and hand the color over as an NSColor to the completion block
+	
+	- parameter completion: handler
+	*/
+	func sendUpdateRequest(completion: (color: NSColor) -> Void) {
 		let session = NSURLSession.sharedSession()
 		
 		let url = NSURL(string: "http://api.thingspeak.com/channels/1417/field/2/last.txt")
-		let request = NSMutableURLRequest(URL: url!)
-		request.HTTPMethod = "GET"
 		
 		let task = session.dataTaskWithURL(url!) { (data, res, err) -> Void in
-			guard let data = data else { return }
+			guard err == nil else {	NSLog("Got an error fetching data from Cheerlights. \(err!.localizedDescription)"); return }
+			guard let data = data else { NSLog("No valid data received from Cheerlights."); return }
+			
 			let hexString = NSString(data: data, encoding: NSUTF8StringEncoding)
 			if let color = NSColor(hexString: hexString as! String) {
 				completion(color: color)
+			} else {
+				NSLog("Failed to convert hexString '\(hexString)' into valid color.")
 			}
 		}
 
